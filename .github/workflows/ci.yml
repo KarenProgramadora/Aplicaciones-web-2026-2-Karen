@@ -10,6 +10,7 @@ jobs:
   verificar:
     name: Verificar codigo, formato PEP 8 y conexion a la base de datos
     runs-on: ubuntu-latest
+    environment: DATABASE_URL
 
     steps:
       - name: Descargar el codigo del repositorio
