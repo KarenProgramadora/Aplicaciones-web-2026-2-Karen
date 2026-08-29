@@ -1,7 +1,8 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
-
+from src.api.product import router as product_router
+from src.entities import Product as _product_model
 from src.api.personas import router as personas_router
 from src.database.database import Base, engine
 from src.entities import personas as _personas_model
@@ -30,3 +31,4 @@ def inicio():
 
 
 app.include_router(personas_router)
+app.include_router(product_router)
