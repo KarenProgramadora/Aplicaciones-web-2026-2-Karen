@@ -23,7 +23,11 @@ def get_product(product_id: UUID, db: Session = Depends(get_db)):
     return product
 
 
-@router.post("", response_model=ProductRead, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "",
+    response_model=ProductRead,
+    status_code=status.HTTP_201_CREATED,
+)
 def create_product(data: ProductCreate, db: Session = Depends(get_db)):
     return repo.create_product(db, data)
 
