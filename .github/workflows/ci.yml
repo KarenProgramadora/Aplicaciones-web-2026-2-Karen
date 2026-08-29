@@ -1,7 +1,7 @@
 name: CI - Verificar Pull Request
 
 # Se dispara al abrir un PR hacia main y en cada push a ese PR
-on:
+"on":
   pull_request:
     branches:
       - main
@@ -35,7 +35,8 @@ jobs:
       - name: Verificar que la app FastAPI se pueda importar
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: python -c "from main import app; print(f'Rutas registradas: {len(app.routes)}')"
+        run: |
+          python -c "from main import app; print('Rutas registradas', len(app.routes))"
 
       - name: Verificar la conexion a la base de datos
         env:
