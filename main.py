@@ -9,6 +9,7 @@ from src.database.database import Base, engine
 from src.entities import Product as _product_model
 from src.entities import empleados as _empleados_model
 from src.entities import personas as _personas_model
+from src.entities import estudiantes as _estudiantes_model
 
 
 @asynccontextmanager
