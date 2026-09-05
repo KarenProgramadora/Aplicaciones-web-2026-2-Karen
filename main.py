@@ -3,11 +3,11 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from src.api.empleados import router as empleados_router
-<<<<<<< HEAD
+
 from src.api.mascotas import router as mascota_router
-=======
+
 from src.api.estudiantes import router as estudiantes_router
->>>>>>> origin/main
+
 from src.api.personas import router as personas_router
 from src.api.product import router as product_router
 from src.api.vehiculo import router as vehiculo_router
@@ -45,9 +45,8 @@ def inicio():
 app.include_router(personas_router)
 app.include_router(empleados_router)
 app.include_router(product_router)
-<<<<<<< HEAD
+
 app.include_router(mascota_router)
-=======
+
 app.include_router(vehiculo_router)
 app.include_router(estudiantes_router)
->>>>>>> origin/main
