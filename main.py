@@ -3,14 +3,17 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from src.api.empleados import router as empleados_router
+from src.api.estudiantes import router as estudiantes_router
 from src.api.personas import router as personas_router
 from src.api.product import router as product_router
 from src.api.vehiculo import router as vehiculo_router
 from src.database.database import Base, engine
 from src.entities import Product as _product_model
 from src.entities import empleados as _empleados_model
+from src.entities import estudiantes as _estudiantes_model
 from src.entities import personas as _personas_model
 from src.entities import vehiculo as _vehiculo_model
+
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
@@ -38,3 +41,4 @@ app.include_router(personas_router)
 app.include_router(empleados_router)
 app.include_router(product_router)
 app.include_router(vehiculo_router)
+app.include_router(estudiantes_router)
