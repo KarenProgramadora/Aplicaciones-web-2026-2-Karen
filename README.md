@@ -1,6 +1,11 @@
 video Alejandro Jaramillo Agudelo 
 [grabacion-examen-2.zip](https://github.com/user-attachments/files/32418010/grabacion-examen-2.zip)
 
+Video Jose David Quintero
+[Video Servicios Web.zip](https://github.com/user-attachments/files/32421431/Video.Servicios.Web.zip)
+
+
+
 
 
 
