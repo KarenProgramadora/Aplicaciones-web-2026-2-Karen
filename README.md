@@ -397,3 +397,7 @@ Próximos pasos: sigue la [guía práctica Neon + ORM](GUIA-NEON-ORM.md) para cr
 5. Prueba **GET / POST / PUT / DELETE** en `/docs`; deja **OPTIONS** para CORS.
 
 Con eso tienes el ciclo completo de una aplicación y un servicio web.
+----------------------------------------
+Segundo entregable 
+Video Karen Cardona
+https://youtu.be/n2ocmXmhNiM link 
