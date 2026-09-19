@@ -1,3 +1,25 @@
+video Alejandro Jaramillo Agudelo 
+[grabacion-examen-2.zip](https://github.com/user-attachments/files/32418010/grabacion-examen-2.zip)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Aplicaciones y Servicios Web — ITM 2026-2
 
 Repositorio del curso de **Aplicaciones y Servicios Web** (ITM 2026-2). Aquí construiremos APIs con **FastAPI**, expondremos recursos con **REST** y persistiremos datos en **PostgreSQL** usando un **ORM** contra **Neon**.
