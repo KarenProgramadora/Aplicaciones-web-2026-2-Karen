@@ -1,20 +1,21 @@
 name: CD - Migrar y sembrar la base de datos
 
-# Se dispara al hacer merge (push) a main y tambien a mano
-"on":
+# Se ejecuta cuando hay un push a main y tambien se puede ejecutar manualmente
+
+on:
   push:
     branches:
       - main
   workflow_dispatch:
 
-# Evita que dos merges seguidos escriban en la base al mismo tiempo
+# Evita que dos ejecuciones escriban en la base al mismo tiempo
 concurrency:
   group: cd-main
   cancel-in-progress: false
 
 jobs:
   migrar-y-sembrar:
-    name: Crear tablas nuevas y cargar datos base
+    name: Migrar y sembrar la base de datos
     runs-on: ubuntu-latest
     environment: DATABASE_URL
 
@@ -33,7 +34,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Crear tablas nuevas y ejecutar el seeder
+      - name: Ejecutar migraciones de Alembic
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: alembic upgrade head
+
+      - name: Ejecutar seeder
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: python -m src.database.seeder
