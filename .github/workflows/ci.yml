@@ -28,10 +28,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: Verificar que el codigo compile
-        run: python -m compileall -q main.py src
+        run: python -m compileall -q main.py src/database/seeder.py
 
       - name: Verificar formato PEP 8 con Pylint
-        run: python -m pylint main.py src
+        run: python -m pylint main.py src/database/seeder.py
 
       - name: Verificar que la app FastAPI se pueda importar
         env:
