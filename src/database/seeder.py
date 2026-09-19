@@ -5,14 +5,16 @@ from decimal import Decimal
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from src.database.database import Base, SessionLocal, engine
+from src.database.database import SessionLocal
 from src.entities import Empleado, Persona, Product
+
 
 PERSONAS_SEMILLA = [
     {"nombre": "Ana Perez", "programa": "Ingenieria de Sistemas"},
     {"nombre": "Carlos Ramirez", "programa": "Ingenieria de Software"},
     {"nombre": "Laura Gomez", "programa": "Ingenieria Electronica"},
 ]
+
 
 EMPLEADOS_SEMILLA = [
     {
@@ -34,6 +36,7 @@ EMPLEADOS_SEMILLA = [
         "email": "laura.gomez@itm.edu.co",
     },
 ]
+
 
 PRODUCTOS_SEMILLA = [
     {
@@ -72,12 +75,6 @@ PRODUCTOS_SEMILLA = [
 ]
 
 
-def crear_tablas() -> None:
-    """Crea las tablas que aun no existen. No modifica las que ya estan."""
-    Base.metadata.create_all(bind=engine)
-    print("Tablas verificadas/creadas.")
-
-
 def _insertar_si_falta(
     db: Session,
     modelo: type,
@@ -89,7 +86,10 @@ def _insertar_si_falta(
 
     for datos in filas:
         etiqueta = datos[campo]
-        existe = db.scalar(select(modelo).where(columna == etiqueta))
+        existe = db.scalar(
+            select(modelo).where(columna == etiqueta)
+        )
+
         if existe is not None:
             print(f"Ya existe: {etiqueta}")
             continue
@@ -103,15 +103,30 @@ def _insertar_si_falta(
 
 
 def main() -> None:
-    crear_tablas()
-
     db = SessionLocal()
+
     try:
-        personas = _insertar_si_falta(db, Persona, "nombre", PERSONAS_SEMILLA)
-        empleados = _insertar_si_falta(
-            db, Empleado, "email", EMPLEADOS_SEMILLA
+        personas = _insertar_si_falta(
+            db,
+            Persona,
+            "nombre",
+            PERSONAS_SEMILLA,
         )
-        productos = _insertar_si_falta(db, Product, "sku", PRODUCTOS_SEMILLA)
+
+        empleados = _insertar_si_falta(
+            db,
+            Empleado,
+            "email",
+            EMPLEADOS_SEMILLA,
+        )
+
+        productos = _insertar_si_falta(
+            db,
+            Product,
+            "sku",
+            PRODUCTOS_SEMILLA,
+        )
+
     finally:
         db.close()
 
