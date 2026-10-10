@@ -4,6 +4,10 @@ video Alejandro Jaramillo Agudelo
 Video Jose David Quintero
 [Video Servicios Web.zip](https://github.com/user-attachments/files/32421431/Video.Servicios.Web.zip)
 
+Video Karen Cardona 
+tercera entrega 
+
+https://correoitmedu-my.sharepoint.com/:v:/g/personal/karencardona1129847_correo_itm_edu_co/IQAJ5baChGa_TqfOgVLAMqPAAXNliwvEafIoPImSMTnCcwc
 
 
 
@@ -425,6 +429,4 @@ Próximos pasos: sigue la [guía práctica Neon + ORM](GUIA-NEON-ORM.md) para cr
 
 Con eso tienes el ciclo completo de una aplicación y un servicio web.
 ----------------------------------------
-Segundo entregable 
-Video Karen Cardona
-https://youtu.be/n2ocmXmhNiM link 
+
