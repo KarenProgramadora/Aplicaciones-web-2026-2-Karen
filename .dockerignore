@@ -1,8 +1,10 @@
+.venv
+venv
 .git
 .github
-.env
-venv
-.venv
 __pycache__
-*.pyc
 .pytest_cache
+*.pyc
+.env
+.env.*
+!.env.example

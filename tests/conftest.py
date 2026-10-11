@@ -36,6 +36,7 @@ def client_fixture():
     yield TestClient(app)
     app.dependency_overrides.clear()
     Base.metadata.drop_all(bind=engine)
+    engine.dispose()
 
 
 @pytest.fixture(name="mascota_valida")

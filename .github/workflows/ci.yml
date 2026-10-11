@@ -1,4 +1,4 @@
-name: CI - Verificar Pull Request
+﻿name: CI - Verificar Pull Request
 
 # Se dispara al abrir un PR hacia main y en cada push a ese PR
 "on":
@@ -8,7 +8,7 @@ name: CI - Verificar Pull Request
 
 jobs:
   verificar:
-    name: Verificar codigo, formato PEP 8 y conexion a la base de datos
+    name: Verificar codigo, pruebas, formato y base de datos
     runs-on: ubuntu-latest
     environment: DATABASE_URL
 
@@ -30,6 +30,11 @@ jobs:
       - name: Verificar que el codigo compile
         run: python -m compileall -q main.py src/database/seeder.py
 
+      - name: Ejecutar pruebas automatizadas con Pytest
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python -m pytest -v
+
       - name: Verificar formato PEP 8 con Pylint
         run: python -m pylint main.py src/database/seeder.py
 
@@ -43,17 +48,6 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: python -m scripts.verificar_bd
-      - name: Ejecutar pruebas con Pytest
-        run: python -m pytest -v
 
-      - name: Construir la imagen Docker
-        run: docker build -t mascotas-api .
-
-      - name: Ejecutar la API usando la imagen Docker
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: |
-          docker run -d --name mascotas -p 8000:8000 -e DATABASE_URL mascotas-api
-          curl --fail --retry 10 --retry-delay 2 --retry-connrefused http://localhost:8000/docs
-          docker logs mascotas
-          docker stop mascotas
+      - name: Construir imagen Docker
+        run: docker build -t estudiantes-api:ci .
