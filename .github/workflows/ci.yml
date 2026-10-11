@@ -43,3 +43,5 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: python -m scripts.verificar_bd
+      - name: Ejecutar pruebas con Pytest
+        run: python -m pytest -v
