@@ -1,4 +1,4 @@
-﻿name: CI - Verificar Pull Request
+name: CI - Verificar Pull Request
 
 # Se dispara al abrir un PR hacia main y en cada push a ese PR
 "on":
@@ -51,3 +51,22 @@ jobs:
 
       - name: Construir imagen Docker
         run: docker build -t estudiantes-api:ci .
+
+      - name: Ejecutar la API usando la imagen Docker
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          docker run -d --name api-ci -p 8000:8000 -e DATABASE_URL estudiantes-api:ci
+          for i in $(seq 1 30); do
+            if curl --silent --fail http://localhost:8000/docs > /dev/null; then
+              echo "La API respondio correctamente"
+              docker logs api-ci
+              docker stop api-ci
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "La API no respondio a tiempo"
+          docker logs api-ci
+          docker stop api-ci
+          exit 1

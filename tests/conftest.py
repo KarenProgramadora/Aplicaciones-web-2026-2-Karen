@@ -1,8 +1,6 @@
 import os
 
-os.environ.setdefault(
-    "DATABASE_URL", "postgresql://usuario:clave@localhost:5432/pruebas"
-)
+os.environ["DATABASE_URL"] = "sqlite://"
 
 # pylint: disable=wrong-import-position
 import pytest
@@ -15,26 +13,38 @@ from main import app
 from src.database.database import Base, get_db
 
 
-@pytest.fixture()
-def client():
+@pytest.fixture(name="client")
+def client_fixture():
     engine = create_engine(
         "sqlite://",
         connect_args={"check_same_thread": False},
         poolclass=StaticPool,
     )
     Base.metadata.create_all(bind=engine)
-    sesion_prueba = sessionmaker(
+    testing_session = sessionmaker(
         bind=engine, autoflush=False, autocommit=False
     )
 
-    def get_db_prueba():
-        db = sesion_prueba()
+    def override_get_db():
+        db = testing_session()
         try:
             yield db
         finally:
             db.close()
 
-    app.dependency_overrides[get_db] = get_db_prueba
+    app.dependency_overrides[get_db] = override_get_db
     yield TestClient(app)
     app.dependency_overrides.clear()
+    Base.metadata.drop_all(bind=engine)
     engine.dispose()
+
+
+@pytest.fixture(name="mascota_valida")
+def mascota_valida_fixture():
+    return {
+        "nombre": "Firulais",
+        "especie": "Perro",
+        "edad_meses": 8,
+        "esterilizado": False,
+        "fecha_ingreso": "2026-09-01",
+    }
