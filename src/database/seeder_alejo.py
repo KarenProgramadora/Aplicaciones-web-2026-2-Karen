@@ -1,7 +1,9 @@
+"""Datos iniciales de Mascota (Alejo)."""
+
 from datetime import date
 
 from src.database.database import SessionLocal
-from src.database.seeder import _insertar_si_falta, crear_tablas
+from src.database.seeder import _insertar_si_falta
 from src.entities import Mascota
 
 MASCOTAS_SEMILLA = [
@@ -30,8 +32,6 @@ MASCOTAS_SEMILLA = [
 
 
 def main() -> None:
-    crear_tablas()
-
     db = SessionLocal()
     try:
         mascotas = _insertar_si_falta(
