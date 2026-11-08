@@ -9,6 +9,8 @@ from src.api.mascotas import router as mascota_router
 
 from src.api.estudiantes import router as estudiantes_router
 
+
+
 from src.api.personas import router as personas_router
 from src.api.product import router as product_router
 from src.api.vehiculo import router as vehiculo_router
@@ -32,6 +34,13 @@ app = FastAPI(
     description="API REST con FastAPI, SQLAlchemy y Neon PostgreSQL",
     version="1.0.0",
     lifespan=lifespan,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:4200"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
